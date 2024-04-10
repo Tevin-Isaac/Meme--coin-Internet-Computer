@@ -48,3 +48,13 @@ The token standards on the Internet Computer include the following:
  5. **DIP-20**:
 DIP-20, also known as the "Dfinity Internet Computer Token Standard," is a proposed standard for creating and managing fungible tokens on the Internet Computer. The acronym "DIP" stands for "Dfinity Improvement Proposal," and the DIP-20 standard is part of the DIP group of standards created by the Dfinity Foundation.Similar to the ERC-20 standard on Ethereum, the DIP-20 standard defines a set of common interfaces and behaviors for fungible tokens on the Internet Computer. Fungible tokens are interchangeable and identical, meaning that each token is equal in value to every other token of the same type.
 The DIP-20 standard specifies a set of mandatory and optional functions that a token contract must implement to be considered compliant with the standard. These functions include functionalities such as transferring tokens, querying token balances, and approving token allowances.By adhering to the DIP-20 standard, token contracts can ensure interoperability with other contracts and applications that support the same standard. This interoperability allows tokens to be traded, exchanged, and utilized in a wide range of decentralized applications (dApps) and smart contracts within the Internet Computer ecosystem.Overall, the DIP-20 standard provides a common framework for creating fungible tokens on the Internet Computer, enabling developers to build and deploy token contracts that are compatible with a wide variety of applications and services.
+
+
+ 5. **EXT**:
+ functionality based on the purpose of the token. EXT Standard allows for the following features:
+* Multiple tokens (which can be a mix, e.g. fungible and non-fungible) within a single canister. This provides better computation/gas savings and can reduce complexities.
+* Bulit-in transfer notifications for more streamlined usage (e.g. similar to transferAndCall).
+Supports both native AccountIdentifiers (64 long hex strings) and Principals. EXT integrates well with both address styles making it easier for end users to interact with.
+* Extendable standard with a method to query a token's capabilities to aid in deciding how to communicate with it (better integration with 3rd party tools).
+* A unique TokenIdentifier is generated for each token with a canister (e.g. cnvzt-kikor-uwiaa-aaaaa-b4aah-eaqca-aaaaa-a) which is constructed using the canister ID and the token index within the canister. The canister ID can also be used which would point to the 0 index token (perfect if you have a single token like the erc20 example)
+* WIP: Building a new core entrypoint named exchange to incorporate exchange mechanism directly into our core token standard
