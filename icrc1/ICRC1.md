@@ -343,7 +343,7 @@ For each variable, the exported environment variable will be used unless otherwi
 Step 7: Deploy the ICRC-1 ledger canister locally:
 
 ```bash
-dfx deploy icrc1_ledger_canister --specified-id ryjl3-tyaaa-aaaaa-aaaba-cai --argument "(variant {Init =
+dfx deploy icrc1_ledger_canister --specified-id mxzaz-hqaaa-aaaar-qaada-cai --argument "(variant {Init =
 record {
      token_symbol = \"${TOKEN_SYMBOL}\";
      token_name = \"${TOKEN_NAME}\";
