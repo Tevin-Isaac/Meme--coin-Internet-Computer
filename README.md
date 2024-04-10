@@ -45,16 +45,7 @@ The token standards on the Internet Computer include the following:
 
 4. **ICRC-7**: The ICRC-7 standard is a new standard for non-fungible tokens on the Internet Computer. It is designed to be a minimal standard for allowing an NFT collection to be deployed on the Internet Computer. ICRC-7 implements several additional API methods compared to the DIP721 standard, such as batch query methods, batch update methods, and collection approval methods.
 
-These standards provide guidelines for API methods that support necessary token functionalities, and developers can choose the appropriate standard based on their specific requirements for fungible or non-fungible tokens.
-
-
-
-
-
-
-
-
-# DIP 20
+ 5. **DIP-20**:
 DIP-20, also known as the "Dfinity Internet Computer Token Standard," is a proposed standard for creating and managing fungible tokens on the Internet Computer. The acronym "DIP" stands for "Dfinity Improvement Proposal," and the DIP-20 standard is part of the DIP group of standards created by the Dfinity Foundation.
 
 Similar to the ERC-20 standard on Ethereum, the DIP-20 standard defines a set of common interfaces and behaviors for fungible tokens on the Internet Computer. Fungible tokens are interchangeable and identical, meaning that each token is equal in value to every other token of the same type.
