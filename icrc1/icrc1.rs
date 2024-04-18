@@ -1,37 +1,41 @@
-use std::collections::HashMap;  // Import standard library HashMap for managing token ledger
-use ic_cdk::export::candid::{CandidType, Principal};  // Import CandidType trait and related types for Candid serialization
-use ic_cdk::export::candid::Nat; // Import CandidType trait and related types for Candid serialization
-use icrc1_ledger_canister::ICRCLedger; // Import ICRCLedger canister
+use std::collections::HashMap;
+use candid::CandidType;
+use candid::Nat;
+use ic_cdk::candid::{CandidType, Principal};
+use icrc1_ledger_canister::ICRCLedger;
 
-// Define the ICRC1 meme token canister
 #[derive(CandidType)]
 struct ICRC1MemeToken {
-    id: Nat, // Token identifier
-    name: String, // Token name
-    symbol: String, // Token symbol
-    total_supply: Nat, // Total token supply
-    ledger: HashMap<Principal, Nat>, // Token balances ledger
-    meme_url: String, // Meme URL associated with the token
-    meme_description: String, // Description of the meme
-    meme_creator: Principal, // Creator of the meme
+    id: Nat,
+    name: String,
+    symbol: String,
+    total_supply: Nat,
+    ledger: HashMap<Principal, Nat>,
+    meme_url: String,
+    meme_description: String,
+    meme_creator: Principal,
 }
 
 impl ICRC1MemeToken {
-    // Initialize the ICRC1 meme token with the specified parameters
-    pub fn new(id: Nat, total_supply: Nat, meme_url: String, meme_description: String, meme_creator: Principal) -> Self {
+    pub fn new(
+        id: Nat,
+        total_supply: Nat,
+        meme_url: String,
+        meme_description: String,
+        meme_creator: Principal,
+    ) -> Self {
         ICRC1MemeToken {
             id,
-            name: "Kadudu".to_string(), // Set the token name to "Kadudu"
-            symbol: "KD".to_string(), // Example symbol
+            name: "Kadudu".to_string(),
+            symbol: "KD".to_string(),
             total_supply,
             ledger: HashMap::new(),
-            meme_url:"https://example.com/meme.jpg".to_string(),
-            meme_description"its that dudu".to_string(),
+            meme_url,
+            meme_description,
             meme_creator,
         }
     }
 
-    // Transfer tokens from one account to another
     pub fn transfer(&mut self, from: Principal, to: Principal, amount: Nat) -> Result<(), String> {
         if let Some(balance) = self.ledger.get_mut(&from) {
             if *balance >= amount {
@@ -46,18 +50,15 @@ impl ICRC1MemeToken {
         }
     }
 
-    // Get the balance of tokens for a specific account
     pub fn balance_of(&self, account: Principal) -> Nat {
         *self.ledger.get(&account).unwrap_or(&0)
     }
 
-    // Mint new tokens
     pub fn mint(&mut self, to: Principal, amount: Nat) {
         *self.ledger.entry(to).or_insert(0) += amount;
         self.total_supply += amount;
     }
 
-    // Burn tokens
     pub fn burn(&mut self, from: Principal, amount: Nat) -> Result<(), String> {
         if let Some(balance) = self.ledger.get_mut(&from) {
             if *balance >= amount {
@@ -72,12 +73,10 @@ impl ICRC1MemeToken {
         }
     }
 
-    // Get the meme creator
     pub fn get_meme_creator(&self) -> Principal {
         self.meme_creator
     }
 
-    // Get the meme description
     pub fn get_meme_description(&self) -> String {
         self.meme_description.clone()
     }
