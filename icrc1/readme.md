@@ -198,7 +198,6 @@ Namespace `icrc1` is reserved for keys defined in this standard.
 - with the commit hash we run the following commands to download the files
 
 ```bash
-export IC_VERSION=794fc5b9341fa8f6a0e8f219201c35f0b5727ab9
 curl -o icrc1.wasm.gz "https://download.dfinity.systems/ic/$IC_VERSION/canisters/ic-icrc1-ledger.wasm.gz"
 curl -o icrc1.did "https://raw.githubusercontent.com/dfinity/ic/$IC_VERSION/rs/rosetta-api/icrc1/ledger/ledger.did"
 gunzip icrc1.wasm.gz

@@ -1,7 +1,12 @@
-use std::collections::HashMap;  // Import standard library HashMap for managing token ledger
-use ic_cdk::export::candid::{CandidType, Principal};  // Import CandidType trait and related types for Candid serialization
-use ic_cdk::export::candid::Nat; // Import CandidType trait and related types for Candid serialization
-use icrc1_ledger_canister::ICRCLedger; // Import ICRCLedger canister
+// Import standard library HashMap for managing token ledger
+use std::collections::HashMap;
+
+// Import CandidType trait and related types for Candid serialization
+use ic_cdk::export::candid::{CandidType, Principal};
+use ic_cdk::export::candid::Nat;
+
+// Import ICRCLedger canister for ledger management
+use ic_cdk::api::call::ICRCLedger;
 
 // Define the ICRC1 meme token canister
 #[derive(CandidType)]
@@ -13,21 +18,24 @@ struct ICRC1MemeToken {
     ledger: HashMap<Principal, Nat>, // Token balances ledger
     meme_url: String, // Meme URL associated with the token
     meme_description: String, // Description of the meme
-    meme_creator: Principal, // Creator of the meme
+    meme_creator: String, // Creator of the meme
 }
 
 impl ICRC1MemeToken {
     // Initialize the ICRC1 meme token with the specified parameters
-    pub fn new(id: Nat, total_supply: Nat, meme_url: String, meme_description: String, meme_creator: Principal) -> Self {
+    pub fn new(id: Nat, meme_url: String, meme_description: String, meme_creator: String) -> Self {
+        // Total supply set to 10 billion tokens (10,000,000,000)
+        let total_supply: Nat = 10_000_000_000;
+        
         ICRC1MemeToken {
             id,
             name: "Kadudu".to_string(), // Set the token name to "Kadudu"
             symbol: "KD".to_string(), // Example symbol
             total_supply,
             ledger: HashMap::new(),
-            meme_url:"https://example.com/meme.jpg".to_string(),
-            meme_description"its that dudu".to_string(),
-            meme_creator,
+            meme_url,
+            meme_description, // Assign the meme description
+            meme_creator, // Assign the meme creator's name
         }
     }
 
@@ -73,8 +81,8 @@ impl ICRC1MemeToken {
     }
 
     // Get the meme creator
-    pub fn get_meme_creator(&self) -> Principal {
-        self.meme_creator
+    pub fn get_meme_creator(&self) -> String {
+        self.meme_creator.clone()
     }
 
     // Get the meme description
